@@ -18,7 +18,7 @@ Route::post('/contact-us', [PubblicController::class, 'contactUs'])->name('conta
 
 
 Route::get('/movies', [MovieController::class, 'index'])->name('movie.index');
-Route::get('/movie/detail/{movie}', [MovieController::class, 'show'])->name('movie.detail');
+Route::get('/movie/show/{movie}', [MovieController::class, 'show'])->name('movie.show');
 Route::get('/movie/create', [MovieController::class, 'create'])->name('movie.create');
 Route::post('/movie/submit', [MovieController::class, 'store'])->name('movie.submit');
 Route::get('/movie/edit/{movie}', [MovieController::class, 'edit'])->name('movie.edit');
