@@ -24,3 +24,6 @@ Route::post('/movie/submit', [MovieController::class, 'store'])->name('movie.sub
 Route::get('/movie/edit/{movie}', [MovieController::class, 'edit'])->name('movie.edit');
 Route::put('/movie/update/{movie}', [MovieController::class, 'update'])->name('movie.update');
 Route::delete('/movie/delete/{movie}', [MovieController::class, 'destroy'])->name('movie.delete');
+
+//PROFILO
+Route::get('/user/profile', [PubblicController::class, 'profile'])->name('user.profile');

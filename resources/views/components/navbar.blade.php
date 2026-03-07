@@ -35,11 +35,16 @@
                     </li>
                     <li class="nav-item dropdown">
                         @auth
-                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Ciao, {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{route('user.profile')}}">Profilo personale</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                     @csrf

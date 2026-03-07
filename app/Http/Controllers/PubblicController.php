@@ -47,4 +47,8 @@ class PubblicController extends Controller
         
         return redirect(route('homepage'))->with('emailSent', 'Hai inviato correttamente la tua mail, ti risponderemo al più presto!');
     }
+
+    public function profile(){
+        return view('profile');
+    }
 }

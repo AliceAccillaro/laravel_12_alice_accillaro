@@ -37,7 +37,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="plot" class="form-label text-white">Trama:</label>
-                        <textarea name="plot" class="form-control" id="plot" cols="30" rows="10">{{old('plot')}}></textarea>
+                        <textarea name="plot" class="form-control" id="plot" cols="30" rows="10">{{old('plot')}}</textarea>
                     </div>
 
 
