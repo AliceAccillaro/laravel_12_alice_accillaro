@@ -1,0 +1,61 @@
+/* header homepage */
+
+.header {
+    background-image: url('/media/header.jpg');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.text-color {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* pagina contatti */
+
+.box{
+    border: dotted 2px white;
+    min-height: 250px;
+    max-width: 250px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.box:hover{
+    border: solid 3px white;
+    transform: translateY(-10px);
+}
+
+.icon{
+    font-size: 50px;
+}
+    
+.fotoTeam{
+    width: 60%;
+    height: 60%;
+    object-fit: cover;
+}
+
+/* section team members */
+
+.userHeight {
+    height: 70vh;
+}
+
+/* sezione movies */
+
+.movies {
+    background-image: url('/media/header.jpg');
+    min-height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.cardImg {
+    height: 250px;
+    object-position: center;
+}
+
