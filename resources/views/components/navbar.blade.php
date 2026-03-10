@@ -31,6 +31,18 @@
                             <li>
                                 <a class="dropdown-item" href="{{ route('movie.create') }}">Inserisci il tuo film</a>
                             </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('genre.create') }}">Aggiungi una categoria</a>
+                            </li>
+                              <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('genre.index') }}">Tutte le categorie</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

@@ -8,7 +8,7 @@ use App\Mail\ContactMail;
 use Exception;
 
 class PubblicController extends Controller
-{   
+{
     public $users = [
         ['name' => 'Mario', 'surname' => 'Rossi', 'role' => 'Senior Manager'],
         ['name' => 'Luigi', 'surname' => 'Bianchi', 'role' => 'Junior Manager'],
@@ -16,15 +16,18 @@ class PubblicController extends Controller
     ];
 
 
-    public function homepage(){
+    public function homepage()
+    {
         return view('welcome');
     }
 
-    public function aboutUs(){
+    public function aboutUs()
+    {
         return view('about-us', ['users' => $this->users]);
     }
 
-    public function aboutUsDetail($nome){
+    public function aboutUsDetail($nome)
+    {
         foreach ($this->users as $user) {
             if ($nome == $user['name']) {
                 return view('about-us-detail', ['user' => $user]);
@@ -32,8 +35,9 @@ class PubblicController extends Controller
         }
     }
 
-    public function contactUs(Request $request){
-       
+    public function contactUs(Request $request)
+    {
+
         $user = $request->input('user');
         $email = $request->input('email');
         $message = $request->input('message');
@@ -44,11 +48,13 @@ class PubblicController extends Controller
         } catch (Exception $e) {
             return redirect()->route('homepage')->with('emailError', "C'è stato un errore nell'invio della mail, riprova più tardi!");
         }
-        
+
         return redirect(route('homepage'))->with('emailSent', 'Hai inviato correttamente la tua mail, ti risponderemo al più presto!');
     }
 
-    public function profile(){
+    public function profile()
+    {
         return view('profile');
     }
+
 }

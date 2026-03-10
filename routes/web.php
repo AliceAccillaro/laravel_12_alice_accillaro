@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PubblicController;
 use App\Http\Controllers\MovieController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GenreController;
 
 
 Route::get('/', [PubblicController::class, 'homepage'])->name('homepage');
@@ -27,3 +28,9 @@ Route::delete('/movie/delete/{movie}', [MovieController::class, 'destroy'])->nam
 
 //PROFILO
 Route::get('/user/profile', [PubblicController::class, 'profile'])->name('user.profile');
+
+// GENRE
+Route::get('/genre/create', [GenreController::class, 'create'])->name('genre.create');
+Route::post('/genre/create/submit', [GenreController::class, 'store'])->name('genre.submit');
+Route::get('/genre/index', [GenreController::class, 'index'])->name('genre.index');
+Route::get('/genre/show/{genre}', [GenreController::class, 'show'])->name('genre.show');
