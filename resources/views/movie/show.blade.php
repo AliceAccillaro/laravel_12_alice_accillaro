@@ -5,7 +5,12 @@
                 <h2>{{ $movie->title }}</h2>
                 <h3>Regista: {{ $movie->director }}</h3>
                 <p>{{ $movie->plot }}</p>
-            </div>
+                <ul>
+                @forelse ($movie->genres as $genre)
+                   <li>{{ $genre->name }}</li>
+                @empty
+                @endforelse
+                </ul>
             <div class="col-12 col-md-6">
                 <img src="{{ Storage::url($movie->img) }}"
                     class="img-fluid"

@@ -6,7 +6,17 @@
         <h5 class="card-title">Titolo: {{$movie->title}}</h5>
         <h5 class="card-title muted">Regista: {{$movie->director}}</h5>
         <p class="card-text">Anno: {{$movie->year}}</p>
-        <p>Creato da: {{$movie->user->name}}</p>
+        <p>Creato da: {{$movie->user->name ?? 'Utente sconosciuto'}}</p>
+        <div class="d-flex">
+            @forelse ($movie->genres as $genre)
+            @if(!$loop->last)
+                <a href="{{ route('genre.show', compact('genre')) }}" class="card-text small text-capitalize mx-1">{{ $genre->name }}, </a>
+            @else
+                <a href="{{ route('genre.show', compact('genre')) }}" class="card-text small text-capitalize mx-1">{{ $genre->name }}</a>
+            @endif
+            @empty
+            @endforelse
+        </div>
         <a href="{{ route('movie.show', compact('movie')) }}" class="btn btn-primary">Leggi di più</a>
         @auth      
         @if ($movie->user_id == Auth::id())

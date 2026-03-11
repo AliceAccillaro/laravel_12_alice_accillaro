@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\MovieEditRequest;
 use App\Http\Requests\MovieRequest;
 use App\Models\Movie;
+use App\Models\Genre;
 
 class MovieController extends Controller
 {
@@ -31,27 +32,32 @@ class MovieController extends Controller
 
     public function create()
     {
-        return view('movie.create');
+        $genres = Genre::all();
+        return view('movie.create', compact('genres'));
     }
 
 
-    public function store(MovieRequest $request)
-    {
-        $data = $request->validated();
+ public function store(MovieRequest $request)
+{
+    $data = $request->validated();
 
-        $data['user_id'] = Auth::id();
+    $data['user_id'] = Auth::id();
 
-        if ($request->hasFile('img')) {
-            $data['img'] = $request->file('img')->store('images', 'public');
-        } else {
-            $data['img'] = null;
-        }
-
-        Movie::create($data);
-
-        return redirect()->route('homepage')
-            ->with('successMessage', 'Hai correttamente inserito il tuo film!');
+    if ($request->hasFile('img')) {
+        $data['img'] = $request->file('img')->store('images', 'public');
+    } else {
+        $data['img'] = null;
     }
+
+    $movie = Movie::create($data);
+
+    if ($request->genres) {
+        $movie->genres()->attach($request->genres);
+    }
+
+    return redirect()->route('homepage')
+        ->with('successMessage', 'Hai correttamente inserito il tuo film!');
+}
 
 
     public function edit(Movie $movie)
