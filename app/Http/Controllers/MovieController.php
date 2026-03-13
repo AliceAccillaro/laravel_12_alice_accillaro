@@ -37,33 +37,34 @@ class MovieController extends Controller
     }
 
 
- public function store(MovieRequest $request)
-{
-    $data = $request->validated();
+    public function store(MovieRequest $request)
+    {
+        $data = $request->validated();
 
-    $data['user_id'] = Auth::id();
+        $data['user_id'] = Auth::id();
 
-    if ($request->hasFile('img')) {
-        $data['img'] = $request->file('img')->store('images', 'public');
-    } else {
-        $data['img'] = null;
+        if ($request->hasFile('img')) {
+            $data['img'] = $request->file('img')->store('images', 'public');
+        } else {
+            $data['img'] = null;
+        }
+
+        $movie = Movie::create($data);
+
+        if ($request->genres) {
+            $movie->genres()->attach($request->genres);
+        }
+
+        return redirect()->route('homepage')
+            ->with('successMessage', 'Hai correttamente inserito il tuo film!');
     }
-
-    $movie = Movie::create($data);
-
-    if ($request->genres) {
-        $movie->genres()->attach($request->genres);
-    }
-
-    return redirect()->route('homepage')
-        ->with('successMessage', 'Hai correttamente inserito il tuo film!');
-}
 
 
     public function edit(Movie $movie)
     {
         if ($movie->user_id == Auth::user()->id) {
-            return view('movie.edit', compact('movie'));
+            $genres = Genre::all();
+            return view('movie.edit', compact('movie', 'genres'));
         } else {
             return redirect()->route('homepage')
                 ->with('errorMessage', 'Non puoi vedere questa pagina');
@@ -82,6 +83,8 @@ class MovieController extends Controller
             }
 
             $movie->update($data);
+
+            $movie->genres()->sync($request->genres ?? []);
 
             return redirect()->route('homepage')
                 ->with('successMessage', 'Hai correttamente modificato il tuo film!');

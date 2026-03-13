@@ -6,19 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class MovieEditRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -26,6 +18,9 @@ class MovieEditRequest extends FormRequest
             'director' => 'required',
             'year' => 'required|numeric',
             'plot' => 'required|min:5',
+            'img' => 'nullable|image',
+            'genres' => 'nullable|array',
+            'genres.*' => 'exists:genres,id',
         ];
     }
     
@@ -39,8 +34,9 @@ class MovieEditRequest extends FormRequest
             'year.numeric' => 'Il campo anno deve essere un numero',
             'plot.required' => 'La trama è obbligatoria',
             'plot.min' => 'La trama deve essere almeno 5 caratteri',
-            'img.required' => 'L\'immagine è obbligatoria',
             'img.image' => 'Il file deve essere di tipo immagine',
+            'genres.array' => 'Il formato dei generi non è valido',
+            'genres.*.exists' => 'Uno dei generi selezionati non esiste',
         ];
     }
 }
